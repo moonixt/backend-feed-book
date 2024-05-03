@@ -1,7 +1,7 @@
 from rest_framework import routers, serializers, viewsets
-from .models import Album
+from .models import Publication
 
-class AlbumSerializer(serializers.ModelSerializer):
+class PublicationSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Album
-        fields = ('id','nome','ano','tipo','artista','capa')
+        model = Publication
+        fields = ('id','artwork','title','subtitle','publication_date','category')
