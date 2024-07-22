@@ -4,11 +4,15 @@ from django.db import models
 
 
 class Publication(models.Model):
+    text = models.TextField()
     artwork = models.ImageField( default='blank.png', upload_to='upload/images', null=False, blank=True)
-    title = models.CharField(max_length=50)
-    subtitle = models.CharField(max_length=50)
     publication_date = models.DateField(auto_now=False, auto_now_add=False)
-    category = models.CharField(max_length=50)
-
     def __str__(self):
-        return self.title
+        return str(self.id)
+
+class Comments(models.Model):
+    comment_text =models.TextField()
+    comment_artwork = models.ImageField( default='blank.png', upload_to='upload/images', null=True, blank=True)
+    pub = models.ForeignKey(Publication, on_delete=models.CASCADE)
+    
+    
