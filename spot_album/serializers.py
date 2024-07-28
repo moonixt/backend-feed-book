@@ -10,4 +10,4 @@ class PublicationSerializer(serializers.ModelSerializer):
 class CommentsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comments
-        fields = ('id','comment_text','comment_artwork','pub')
+        fields = ('id','comment_text','comments_date','comment_artwork','pub')

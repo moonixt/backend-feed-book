@@ -10,6 +10,7 @@ router = routers.DefaultRouter()
 router.register(r'publication',PublicationViewSet)
 router.register(r'comments',CommentsViewSet)
 
+
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
