@@ -3,11 +3,14 @@ from rest_framework import viewsets, status
 from .models import Publication
 from .serializers import PublicationSerializer
 from rest_framework.permissions import IsAuthenticated
-
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Comments
+from .models import User
 from .serializers import CommentsSerializer
+from .serializers import UserSerializer
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 
 
@@ -15,12 +18,37 @@ from .serializers import CommentsSerializer
 class PublicationViewSet(viewsets.ModelViewSet):
     queryset = Publication.objects.all()
     serializer_class = PublicationSerializer
+    permission_classes = (IsAuthenticated,)
     
 class CommentsViewSet(viewsets.ModelViewSet):
     queryset = Comments.objects.all()
     serializer_class = CommentsSerializer
+    permission_classes = (IsAuthenticated,)
+    
+################ Usuario personalizado
 
-
+@classmethod
+def get_token(cls, user):
+        token = super().get_token(user)
+        # Add custom claims
+        token['name'] = user.name  # colocar username dentro do colchetes e após o ponto colocar username
+        # ...
+        return token
+    
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (IsAuthenticated,)
+    
+@api_view(['POST'])
+def create_user(request):
+    if request.method == 'POST':
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message": "User created successfully!"}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+####################
 
 @api_view(['GET'])
 def get_items_post(request, id_post):
