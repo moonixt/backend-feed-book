@@ -26,6 +26,7 @@ class CustomUserManager(UserManager):
         return self._create_user(email, password, **extra_fields)
     
 class User(AbstractBaseUser, PermissionsMixin):
+    profile_pic = models.ImageField( default='nuser.png', upload_to='upload/profile', null=True, blank=True)
     email = models.CharField(max_length=50, null=False,
                              blank=False, unique=True,)
     name = models.CharField(max_length=50, null=False,
