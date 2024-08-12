@@ -11,6 +11,7 @@ from .serializers import CommentsSerializer
 from .serializers import UserSerializer
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
+from .models import User
 
 
 
@@ -37,7 +38,7 @@ def get_token(cls, user):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
     
 @api_view(['POST'])
 def create_user(request):
@@ -57,6 +58,15 @@ def get_items_post(request, id_post):
     publication_s = PublicationSerializer(instance=publication ,many=True)
 
     return Response(publication_s.data, status=status.HTTP_200_OK)    
+
+@api_view(['GET'])
+def get_user(request, id_user):
+    
+    user = User.objects.filter(id = id_user)
+
+    user_s = UserSerializer(instance=user ,many=True)
+
+    return Response(user_s.data, status=status.HTTP_200_OK)    
 
 @api_view(['GET','POST']) #ADICIONADO POST NA LISTA PARA PERMITIR POSTAGENS
 def get_items_post_comments(request, id_comment):

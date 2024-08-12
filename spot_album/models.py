@@ -31,6 +31,8 @@ class User(AbstractBaseUser, PermissionsMixin):
                              blank=False, unique=True,)
     name = models.CharField(max_length=50, null=False,
                             blank=False, unique=True)
+    bio = models.TextField(blank=True, null=True )
+    
     
     
     is_active = models.BooleanField(default=True)
@@ -57,6 +59,8 @@ class Publication(models.Model):
     text = models.TextField()
     artwork = models.ImageField( default='blank.png', upload_to='upload/images', null=True, blank=True)
     publication_date = models.DateField(auto_now_add=True)
+    poster = models.ForeignKey(User, on_delete=models.CASCADE)
+
     def __str__(self):
         return str(self.id)
 

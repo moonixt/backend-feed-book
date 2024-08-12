@@ -4,9 +4,12 @@ from .models import Comments
 from .models import User
 
 class PublicationSerializer(serializers.ModelSerializer):
+    poster = serializers.CharField(source='poster.email', read_only = True)
+    
+
     class Meta:
         model = Publication
-        fields = ('id','title','text','artwork','publication_date',)
+        fields = ('id','title','text','artwork','publication_date','poster')
         
 class CommentsSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,13 +17,13 @@ class CommentsSerializer(serializers.ModelSerializer):
         fields = ('id','comment_text','comments_date','comment_artwork','pub')
         
 class UserSerializer(serializers.ModelSerializer):
-    name = serializers.CharField(write_only=True)
-    email = serializers.EmailField()
+    name = serializers.CharField(write_only=False)
+    email = serializers.EmailField(write_only=True)
     password = serializers.CharField(write_only=True)  # Apenas para escrita, não será incluído na resposta
 
     class Meta:
         model = User
-        fields = ('id','profile_pic','name','email','password')
+        fields = ('id','profile_pic','name','email','password','bio')
         
     
     def validate_name(self, value):
