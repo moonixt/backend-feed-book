@@ -71,6 +71,14 @@ class Comments(models.Model):
     comments_date = models.DateField(auto_now_add=True)
    
        
+class Friends(models.Model):
+    user_id = models.ForeignKey(User,on_delete=models.CASCADE)
+    user_id_2 = models.ForeignKey(User,on_delete=models.CASCADE, related_name="user_f")
+    status = models.BooleanField(default=False)
+    date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ("user_id","user_id_2")
 
 
        

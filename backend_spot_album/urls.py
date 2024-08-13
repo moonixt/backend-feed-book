@@ -1,7 +1,7 @@
 
 from django.contrib import admin
 from django.urls import path, include
-from spot_album.views import PublicationViewSet,CommentsViewSet,UserViewSet, get_items_post, get_items_post_comments, create_user, get_user #xxxx nome da pasta app
+from spot_album.views import PublicationViewSet,CommentsViewSet,UserViewSet,FriendsViewSet, get_items_post, get_items_post_comments, create_user, get_user #xxxx nome da pasta app
 from rest_framework import routers
 from django.conf import settings
 from django.conf.urls.static import static
@@ -15,6 +15,8 @@ router = routers.DefaultRouter()
 router.register(r'publication',PublicationViewSet)
 router.register(r'comments',CommentsViewSet)
 router.register(r'users',UserViewSet)
+router.register(r'friends',FriendsViewSet)
+
 
 
 

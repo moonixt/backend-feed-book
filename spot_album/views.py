@@ -12,6 +12,10 @@ from .serializers import UserSerializer
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from .models import User
+from .serializers import FriendsSerializer
+from .models import Friends
+
+
 
 
 
@@ -24,6 +28,10 @@ class PublicationViewSet(viewsets.ModelViewSet):
 class CommentsViewSet(viewsets.ModelViewSet):
     queryset = Comments.objects.all()
     serializer_class = CommentsSerializer
+
+class FriendsViewSet(viewsets.ModelViewSet):
+    queryset = Friends.objects.all()
+    serializer_class = FriendsSerializer
     
 ################ Usuario personalizado
 

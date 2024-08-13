@@ -2,6 +2,7 @@ from rest_framework import routers, serializers, viewsets
 from .models import Publication
 from .models import Comments
 from .models import User
+from .models import Friends
 
 class PublicationSerializer(serializers.ModelSerializer):
     poster = serializers.CharField(source='poster.email', read_only = True)
@@ -51,3 +52,15 @@ class UserSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])  # Criptografa a senha
         user.save()
         return user
+    
+
+class CommentsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comments
+        fields = ('id','comment_text','comments_date','comment_artwork','pub')
+        
+class FriendsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Friends
+        fields = ('user_id','user_id_2')
+  
