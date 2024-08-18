@@ -74,7 +74,17 @@ def get_user(request, id_user):
 
     user_s = UserSerializer(instance=user ,many=True)
 
-    return Response(user_s.data, status=status.HTTP_200_OK)    
+    return Response(user_s.data, status=status.HTTP_200_OK)  
+
+
+@api_view(['GET'])
+def get_all_users(request,):
+    
+    users = User.objects.all() # Usa `all()` para obter todos os usuários
+
+    user_serializer = UserSerializer(users, many=True)  # Passa `users` diretamente
+
+    return Response(user_serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['GET','POST']) #ADICIONADO POST NA LISTA PARA PERMITIR POSTAGENS
 def get_items_post_comments(request, id_comment):
