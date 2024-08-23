@@ -7,7 +7,8 @@ A intenção deste projeto é a criação de uma rede social.
 
 Frontend do projeto: https://github.com/moonixt/feed-book
 
-![image_2024-08-01_21-29-49](https://github.com/user-attachments/assets/cdc42b02-46b3-4771-af2b-7182949f2343)
+![electron_PUWanwZUd8](https://github.com/user-attachments/assets/fcd269ab-49d8-4065-9cae-b61fab58ad87)
+
 
 ## Instalação
 
