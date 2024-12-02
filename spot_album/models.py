@@ -57,7 +57,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 class Publication(models.Model):
     title = models.CharField(max_length=30, null=False, blank=False)
     text = models.TextField()
-    artwork = models.ImageField( default='blank.png', upload_to='upload/images', null=True, blank=True)
+    artwork = models.ImageField( upload_to='upload/images', null=True, blank=True)
     publication_date = models.DateField(auto_now_add=True)
     poster = models.ForeignKey(User, on_delete=models.CASCADE)
 

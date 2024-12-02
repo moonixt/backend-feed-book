@@ -58,7 +58,7 @@ def create_user(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 ####################
 
-@api_view(['GET'])
+@api_view(['GET','Post'])
 def get_items_post(request, id_post):
     
     publication = Publication.objects.filter(id = id_post)

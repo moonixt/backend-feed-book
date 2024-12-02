@@ -5,12 +5,14 @@ from .models import User
 from .models import Friends
 
 class PublicationSerializer(serializers.ModelSerializer):
-    poster = serializers.CharField(source='poster.email', read_only = True)
+    poster = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+    poster_email = serializers.CharField(source='poster.email', read_only=True)  # Para exibição do e-mail
+
     
 
     class Meta:
         model = Publication
-        fields = ('id','title','text','artwork','publication_date','poster')
+        fields = ('id','title','text','artwork','publication_date','poster','poster_email')
         
 class CommentsSerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,7 +21,7 @@ class CommentsSerializer(serializers.ModelSerializer):
         
 class UserSerializer(serializers.ModelSerializer):
     name = serializers.CharField(write_only=False)
-    email = serializers.EmailField(write_only=True)
+    email = serializers.EmailField(write_only=True) #EMAIL SER EXIBIDO PUBLICAMENTE
     password = serializers.CharField(write_only=True)  # Apenas para escrita, não será incluído na resposta
 
     class Meta:
